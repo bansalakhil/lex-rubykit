@@ -33,7 +33,7 @@ module LexRubykit
         dialog_action.message_content = speech_text
       end
     end
-    
+
     # def add_audio_url(url, token='', offset=0)
     #   @directives << {
     #     'type' => 'AudioPlayer.Play',
@@ -131,8 +131,15 @@ module LexRubykit
     # Builds a response.
     # Takes the version, response and should_end_session variables and builds a JSON object.
     def build_response(session_end = true)
+      session_end = false if should_end_session == false
       response = build_response_object(session_end)
-      response[:sessionAttributes] = @session_attributes #unless @session_attributes.empty?
+
+      if @response[:dialogAction]['type'] ==  LexRubykit::DialogAction::DIALOG_ACTION_TYPES[:close]
+        response[:sessionAttributes] = {}
+      else
+        response[:sessionAttributes] = @session_attributes
+      end
+
       response[:sessionAttributes][:inputTranscript] = request.input_transcript
       response.to_json
     end

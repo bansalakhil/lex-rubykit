@@ -16,7 +16,7 @@ module LexRubykit
       @confirmation_status   = json_request['confirmationStatus']
       @json               = json_request
       @json_mash          = Hashie::Mash.new(@json)
-      @session            = LexRubykit::Session.new(json_request['sessionAttributes'])
+      @session            = LexRubykit::Session.new(json_request['sessionAttributes'] || {})
       @bot                = LexRubykit::Session.new(json_request['bot'])
     end
   end

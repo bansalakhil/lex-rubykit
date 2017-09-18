@@ -18,7 +18,6 @@ module LexRubykit
 
   # Returns true if all the Lex request objects are set.
   def self.valid_lex?(request_json)
-    !request_json.nil? && !request_json['sessionAttributes'].nil? &&
-        !request_json['messageVersion'].nil? && !request_json['bot'].nil? && !request_json['invocationSource'].nil?
+    !request_json.nil?  &&  !request_json['messageVersion'].nil? && !request_json['bot'].nil? && !request_json['invocationSource'].nil?
   end
 end
