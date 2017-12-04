@@ -25,6 +25,7 @@ module LexRubykit
     end
 
     def add_speech(speech_text, ssml = false)
+      speech_text = speech_text.to_s.squeeze(' ')
       if ssml
         dialog_action.message_content_type = LexRubykit::DialogAction::MESSAGE_CONTENT_TYPE[:ssml]
         dialog_action.message_content = check_ssml(speech_text)
